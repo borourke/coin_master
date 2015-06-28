@@ -1,0 +1,25 @@
+<div id="general-ledger">
+  <table class="table">
+    <tr class="info">
+      <th>Awesome Person</th>
+      <th>Income or Expense</th>
+      <th>Name</th>
+      <th>Amount</th>
+      <th>Category</th>
+      <th>Date</th>
+      <th>Recurring</th>
+    </tr>
+    <% @transactions.each do |transaction| %>
+      <tr class="<%= transaction.kind == 'Expense' ? 'danger' : 'success' %>">
+        <td><%= transaction.user.name %></td>
+        <td><%= transaction.kind %></td>
+        <td><%= transaction.name %></td>
+        <td><%= transaction.amount %></td>
+        <td><%= transaction.category %></td>
+        <td><%= transaction.formatted_date %></td>
+        <td><%= transaction.recurring %></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= link_to 'Add New Transaction', new_transaction_path, class: 'btn btn-primary', id: 'new_transaction_link' %>
+</div>
