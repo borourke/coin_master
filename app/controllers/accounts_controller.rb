@@ -16,6 +16,6 @@ class AccountsController < ApplicationController
 
     def user_params
       params.require(:general_ledger).permit(:user_id, :name, :kind, :amount,
-        :date, :recurring)
+        :date, :recurring, :category)
     end
 end
