@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
   has_many :general_ledger
-
-  attr_accessible :name, :password, :password_confirmation
   
   attr_accessor :password
   before_save :encrypt_password

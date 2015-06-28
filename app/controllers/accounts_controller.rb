@@ -1,6 +1,10 @@
 class AccountsController < ApplicationController
   def general_ledger
-    @transactions = GeneralLedger.order(:date).decorate
+    if current_user
+      @transactions = GeneralLedger.order(:date).decorate
+    else
+      redirect_to log_in_path
+    end
   end
 
   def new_transaction
