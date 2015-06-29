@@ -56,8 +56,8 @@
           <%= f.input :name %>
           <%= f.input :amount %>
           <%= f.input :category, collection: %w(Food Gas Travel Pleasure Rent Paycheck), default: 'Food' %>
-          <%= f.input :date, as: :date_picker, input_html: { data: { date_options: { defaultDate: Date.today } } } %>
-          <%= f.input :recurring %>
+          <%= f.input :date, as: :date_picker %>
+          <%= f.input :recurring, collection: %w(false true), default: 'false' %>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             <%= f.button :submit, 'Save Transaction', class: 'btn btn-primary'%>

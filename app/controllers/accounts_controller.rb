@@ -17,6 +17,7 @@ class AccountsController < ApplicationController
   private
 
     def user_params
+      params[:general_ledger][:date] = DateTime.parse(params[:general_ledger][:date])
       params.require(:general_ledger).permit(:user_id, :name, :kind, :amount,
         :date, :recurring, :category)
     end
