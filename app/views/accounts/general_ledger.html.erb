@@ -2,8 +2,8 @@
   <table class="table">
     <tr class="info">
       <%= simple_form_for(:filters, :html => { :class => 'form-horizontal' }) do |f| %>
-        <td><%= f.input :name, collection: User.pluck(:name), label: false, default: @params[:name], include_blank: true %></td>
-        <td><%= f.input :kind, collection: %w(Expense Income), label: false, default: @params[:kind], include_blank: true %></td>
+        <td><%= f.input :name, collection: User.pluck(:name), label: false, include_blank: true %></td>
+        <td><%= f.input :kind, collection: %w(Expense Income), label: false, include_blank: true %></td>
         <td><%= f.input :search, placeholder: 'Try all or a piece of a name', as: :string, label: false %></td>
         <td><%= f.input :amount, placeholder: '10.03, <= 10.03, or > 10.03', as: :string, label: false %></td>
         <td><%= f.input :category, collection: GeneralLedger.first.decorate.categories, label: false %></td>

@@ -4,7 +4,6 @@ class AccountsController < ApplicationController
       @transactions = GeneralLedger.this_month.order(:date).decorate
       @transaction = GeneralLedger.new
       @current = :general_ledger
-      @params = params[:filters]
     else
       redirect_to log_in_path
     end
