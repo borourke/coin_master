@@ -9,8 +9,17 @@ class AccountsController < ApplicationController
     end
   end
 
+  def delete_transaction
+    if current_user
+      GeneralLedger.find(params[:id]).destroy
+    end
+    redirect_to general_ledger_path
+  end
+
   def save_transaction
-    GeneralLedger.create(user_params)
+    if current_user
+      GeneralLedger.create(user_params)
+    end
     redirect_to general_ledger_path
   end
 

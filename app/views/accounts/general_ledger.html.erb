@@ -31,7 +31,7 @@
         <td><%= transaction.category %></td>
         <td><%= transaction.formatted_date %></td>
         <td><%= transaction.recurring %></td>
-        <td><%= button_to 'Delete', '#', class: 'btn btn-danger' %></td>
+        <td><%= button_to 'Delete', delete_transaction_path(transaction.id), method: :delete, class: 'btn btn-danger' %></td>
       </tr>
     <% end %>
   </table>
