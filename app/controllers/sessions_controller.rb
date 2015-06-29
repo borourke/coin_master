@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.authenticate(params[:name], params[:password])
+    user = User.authenticate(params[:session][:name], params[:session][:password])
     if user
       session[:user_id] = user.id
       redirect_to general_ledger_path, :notice => "Logged in!"

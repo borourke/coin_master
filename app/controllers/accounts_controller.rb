@@ -1,14 +1,13 @@
 class AccountsController < ApplicationController
   def general_ledger
     if current_user
-      @transactions = GeneralLedger.order(:date).decorate
+      @transactions = GeneralLedger.apply_filters(params).order(:date).decorate
+      @transaction = GeneralLedger.new
+      @current = :general_ledger
+      @params = params[:filters]
     else
       redirect_to log_in_path
     end
-  end
-
-  def new_transaction
-    @transaction = GeneralLedger.new
   end
 
   def save_transaction

@@ -1,6 +1,18 @@
 <div id="general-ledger">
   <table class="table">
     <tr class="info">
+      <%= simple_form_for(:filters, :html => { :class => 'form-horizontal' }) do |f| %>
+        <td><%= f.input :name, collection: User.pluck(:name), label: false, default: @params[:name], include_blank: true %></td>
+        <td><%= f.input :kind, collection: %w(Expense Income), label: false, default: @params[:kind], include_blank: true %></td>
+        <td><%= f.input :search, placeholder: 'Try all or a piece of a name', as: :string, label: false %></td>
+        <td><%= f.input :amount, placeholder: '10.03, <= 10.03, or > 10.03', as: :string, label: false %></td>
+        <td><%= f.input :category, collection: GeneralLedger.first.decorate.categories, label: false %></td>
+        <td><%= f.input :date, collection: GeneralLedger.first.decorate.months, label: false, default: Date.today.strftime('%B - %Y') %></td>
+        <td><%= f.input :recurring, collection: %w(true false), label: false %></td>
+        <td><%= f.button :submit, 'Apply Filters', id: 'filters-button' %></td>
+      <% end %>
+    </tr>
+    <tr class="info">
       <th>Awesome Person</th>
       <th>Income or Expense</th>
       <th>Name</th>
@@ -8,6 +20,7 @@
       <th>Category</th>
       <th>Date</th>
       <th>Recurring</th>
+      <th>Delete</th>
     </tr>
     <% @transactions.each do |transaction| %>
       <tr class="<%= transaction.kind == 'Expense' ? 'danger' : 'success' %>">
@@ -18,8 +31,39 @@
         <td><%= transaction.category %></td>
         <td><%= transaction.formatted_date %></td>
         <td><%= transaction.recurring %></td>
+        <td><%= button_to 'Delete', '#', class: 'btn btn-danger' %></td>
       </tr>
     <% end %>
   </table>
-  <%= link_to 'Add New Transaction', new_transaction_path, class: 'btn btn-primary', id: 'new_transaction_link' %>
+</div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal", id='new_transaction_link'>
+  Add New Transaction
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for(@transaction, html: { class: 'form-horizontal' }) do |f| %>
+          <%= f.association :user, default: 'Eileen' %>
+          <%= f.input :kind, collection: %w(Expense Income), default: 'Expense' %>
+          <%= f.input :name %>
+          <%= f.input :amount %>
+          <%= f.input :category, collection: %w(Food Gas Travel Pleasure Rent Paycheck), default: 'Food' %>
+          <%= f.input :date, as: :date_picker, input_html: { data: { date_options: { defaultDate: Date.today } } } %>
+          <%= f.input :recurring %>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <%= f.button :submit, 'Save Transaction', class: 'btn btn-primary'%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
