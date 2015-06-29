@@ -8,7 +8,7 @@
         <td><%= f.input :amount, placeholder: '10.03, <= 10.03, or > 10.03', as: :string, label: false %></td>
         <td><%= f.input :category, collection: GeneralLedger.first.decorate.categories, label: false %></td>
         <td><%= f.input :date, collection: GeneralLedger.first.decorate.months, label: false, default: Date.today.strftime('%B - %Y') %></td>
-        <td><%= f.input :recurring %></td>
+        <td><%= f.input :recurring, label: false%></td>
         <td><%= f.button :submit, 'Apply Filters', id: 'filters-button' %></td>
       <% end %>
     </tr>
