@@ -6,7 +6,9 @@ class GeneralLedger < ActiveRecord::Base
   def self.apply_filters(params)
     @params ||= params
     if params.nil?
-      this_month
+      # want to do this for the futre: this_month
+      # but until it's getting used heavily:
+      all
     else
       self.person.kind
     end
