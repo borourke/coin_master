@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
   def general_ledger
     if current_user
-      @transactions = GeneralLedger.this_month.order(:date).decorate
+      @transactions = GeneralLedger.order(:date).decorate
       @transaction = GeneralLedger.new
       @current = :general_ledger
     else
