@@ -4,7 +4,7 @@
       <h2 id="sign-in-title"><u>Coin Master</u></h2>
       <%= simple_form_for(:session, url: sessions_path) do |f| %>
         <%= f.input :name, as: :string %>
-        <%= f.input :password, as: :string %>
+        <%= f.input :password %>
         <%= f.button :submit, 'Log In', class: 'btn btn-primary', id: 'login-button' %>
       <% end %>
     </div>
