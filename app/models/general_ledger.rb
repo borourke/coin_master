@@ -27,7 +27,7 @@ class GeneralLedger < ActiveRecord::Base
       self.filter_amount,
       self.filter_recurring,
       self.filter_category
-    ].compact
+    ].compact.join(" and ")
   end
 
   def self.filter_person
