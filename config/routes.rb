@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   delete '/general_ledger/:id', to: 'accounts#delete_transaction', as: 'delete_transaction'
   get '/general_ledger', to: 'accounts#general_ledger', as: 'general_ledger' 
   post '/general_ledger/create', to: 'accounts#save_transaction', as: 'general_ledgers'
+  get '/summary', to: 'accounts#summary', as: 'summary'
 end

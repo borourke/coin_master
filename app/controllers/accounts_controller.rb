@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
   def general_ledger
     if current_user
-      @transactions = GeneralLedger.order(:date).decorate
+      @transactions = GeneralLedger.apply_filters(params[:filters]).decorate
       @transaction = GeneralLedger.new
       @current = :general_ledger
     else
@@ -21,6 +21,16 @@ class AccountsController < ApplicationController
       GeneralLedger.create(user_params)
     end
     redirect_to general_ledger_path
+  end
+
+  def summary
+    if current_user
+      @current = :summary
+      @forecast_date = params[:forecast] ? params[:forecast][:date] : (Date.today + 3.months).at_beginning_of_month
+      @summary_hash = GeneralLedgerSummary.new(@forecast_date).summary_hash
+    else
+      redirect_to log_in_path
+    end
   end
 
   private

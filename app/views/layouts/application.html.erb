@@ -8,23 +8,7 @@
 </head>
 <body>
 
-  <nav class="navbar navbar-fixed-top navbar-inverse">
-    <div class="container">
-      <% if current_user %>
-        <ul class="nav navbar-nav">
-          <li class=""><a href="#">Welcome <%= current_user.name %>!</a></li>
-          <li class="<%= 'active' if @current == :general_ledger %>"><a href="<%= general_ledger_path %>">General Ledger</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "Log Out", log_out_path %></li>
-        </ul>  
-      <% else %>
-        <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "Log In", log_in_path %></li>
-        </ul> 
-      <% end %>
-    </div>
-  </nav>
+<%= render 'layouts/navbar' %>
 
 <%= yield %>
 
