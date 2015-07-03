@@ -15,19 +15,22 @@ class GeneralLedger < ActiveRecord::Base
     else
       GeneralLedger.all.order(:date)
     end
-  rescue
-    GeneralLedger.all.order(:date)
   end
 
   def self.build_filters_query
-    [
+    p "STARTING"
+    test = [
       self.filter_person, 
       self.filter_kind, 
       self.filter_name,
       self.filter_amount,
       self.filter_recurring,
-      self.filter_category
+      self.filter_category,
+      self.filter_date
     ].compact.join(" and ")
+    p test
+    p "ENDING"
+    return test
   end
 
   def self.filter_person
@@ -63,6 +66,14 @@ class GeneralLedger < ActiveRecord::Base
   def self.filter_recurring
     if @params[:recurring]
       "recurring = #{@params[:recurring]}"
+    end
+  end
+
+  def self.filter_date
+    if @params[:date]
+      formatted_date = DateTime.parse(@params[:date]).beginning_of_month
+      ending_date = formatted_date + 1.month
+      "date >= '#{formatted_date}' and date < '#{ending_date}'"
     end
   end
 end
