@@ -55,7 +55,7 @@ class GeneralLedger < ActiveRecord::Base
 
   def self.filter_category
     if @params[:category]
-      "category = #{@params[:category]}"
+      "category = '#{@params[:category]}'"
     end
   end
 
