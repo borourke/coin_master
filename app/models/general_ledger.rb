@@ -13,12 +13,11 @@ class GeneralLedger < ActiveRecord::Base
       general_ledger = @params.empty? ? GeneralLedger.all : GeneralLedger.where(self.build_filters_query)
       general_ledger.order(:date)
     else
-      GeneralLedger.all.order(:date)
+      GeneralLedger.this_month.order(:date)
     end
   end
 
   def self.build_filters_query
-    p "STARTING"
     test = [
       self.filter_person, 
       self.filter_kind, 
@@ -28,9 +27,6 @@ class GeneralLedger < ActiveRecord::Base
       self.filter_category,
       self.filter_date
     ].compact.join(" and ")
-    p test
-    p "ENDING"
-    return test
   end
 
   def self.filter_person
