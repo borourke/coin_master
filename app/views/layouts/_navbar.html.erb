@@ -7,7 +7,7 @@
       <li class="<%= 'active' if @current == :summary %>"><a href="<%= summary_path %>">Summary</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a>This Pages Net Total: $<%= @net_total %>.00</a></li>
+      <% if @current == :general_ledger %><li><a>This Pages Net Total: $<%= @net_total %>.00</a></li><% end %>
       <li><%= link_to "Log Out", log_out_path %></li>
     </ul>  
     <% else %>
