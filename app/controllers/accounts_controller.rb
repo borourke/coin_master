@@ -45,6 +45,6 @@ class AccountsController < ApplicationController
     def net_total(transactions)
       income = transactions.select{ |transaction| transaction.kind == "Income"}.map{ |transaction| transaction.amount }.inject{ |sum, amount| sum + amount }
       expense = transactions.select{ |transaction| transaction.kind == "Expense"}.map{ |transaction| transaction.amount }.inject{ |sum, amount| sum + amount }
-      income.to_f - expense.to_f
+      income.to_i - expense.to_i
     end
 end
