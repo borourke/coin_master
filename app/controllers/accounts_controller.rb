@@ -3,6 +3,7 @@ class AccountsController < ApplicationController
     if current_user
       @transactions = GeneralLedger.apply_filters(params[:filters]).decorate
       @transaction = GeneralLedger.new
+      @net_total = net_total(@transactions)
       @current = :general_ledger
     else
       redirect_to log_in_path
@@ -39,5 +40,11 @@ class AccountsController < ApplicationController
       params[:general_ledger][:date] = DateTime.parse(params[:general_ledger][:date])
       params.require(:general_ledger).permit(:user_id, :name, :kind, :amount,
         :date, :recurring, :category)
+    end
+
+    def net_total(transactions)
+      income = transactions.select{ |transaction| transaction.kind == "Income"}.map{ |transaction| transaction.amount }.inject{ |sum, amount| sum + amount }
+      expense = transactions.select{ |transaction| transaction.kind == "Expense"}.map{ |transaction| transaction.amount }.inject{ |sum, amount| sum + amount }
+      income.to_f - expense.to_f
     end
 end
