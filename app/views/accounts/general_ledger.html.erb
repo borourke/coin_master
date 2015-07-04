@@ -55,7 +55,7 @@
           <%= f.input :kind, collection: %w(Expense Income), default: 'Expense' %>
           <%= f.input :name %>
           <%= f.input :amount %>
-          <%= f.input :category, collection: %w(Food Gas Travel Pleasure Rent Paycheck), default: 'Food' %>
+          <%= f.input :category, collection: %w(Food Restaurant Gas Travel Pleasure Rent Paycheck), default: 'Food' %>
           <%= f.input :date, as: :date_picker %>
           <%= f.input :recurring, collection: %w(false true), default: 'false' %>
           <div class="modal-footer">
