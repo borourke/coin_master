@@ -27,8 +27,9 @@ class AccountsController < ApplicationController
   def summary
     if current_user
       @current = :summary
-      @forecast_date = params[:forecast] ? params[:forecast][:date] : (Date.today + 3.months).at_beginning_of_month
+      @forecast_date = params[:custom_forecast_date] ? Date.parse(params[:custom_forecast_date][:custom_month]) : (Date.today + 3.months).at_beginning_of_month
       @summary_hash = GeneralLedgerSummary.new(@forecast_date).summary_hash
+      @next_years_months = next_years_months
     else
       redirect_to log_in_path
     end
@@ -48,5 +49,11 @@ class AccountsController < ApplicationController
 
     def sum_amount(transactions, kind)
       transactions.select{ |transaction| transaction.kind == kind}.map{ |transaction| transaction.amount }.inject{ |sum, amount| sum + amount }
+    end
+
+    def next_years_months
+      (1..12).each_with_object([]) do |month_step, months_array|
+        months_array << (Date.today.at_beginning_of_month + month_step.months).strftime('%B - %Y')
+      end
     end
 end

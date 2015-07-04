@@ -15,17 +15,28 @@
  *= require bootstrap-datetimepicker
  */
 
-#general-ledger, #new-transaction {
+#general-ledger, #new-transaction, #summary {
  width: 90%;
  margin-right: auto;
  margin-left: auto;
+}
+
+#custom_forecast_date_custom_month {
+  max-width: 30%;
+  display: inline;
+  margin-left: 20px;
+}
+
+#forecast-submit {
+  margin-top: -56px;
+  margin-left: 730px;
 }
 
 #new_transaction_link {
  float: right;
 }
 
-#sign-in-form {
+#sign-in-form, #summary {
   margin-top: 50px;
   margin-bottom: 0px !important;
 }

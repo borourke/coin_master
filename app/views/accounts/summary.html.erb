@@ -1,10 +1,32 @@
-<br>
-<br>
-<br>
-<br>
-<p>total net: <%= @summary_hash[:total_net] %></p>
-<p>recurring monthly income: <%= @summary_hash[:monthly_recurring_receivable] %></p>
-<p>recurring monthly expenses: <%= @summary_hash[:monthly_recurring_payable] %></p>
-<p>last months discresionary spending: <%= @summary_hash[:last_month_discresionary_payable] %></p>
-<p>forecasted total by <%= @forecast_date %>: <%= @summary_hash[:forecasted_amount] %></p>
-
+<div id="summary">
+  <table class="table">
+    <tr class="info">
+      <th>Net Total:</th>
+      <td><%= @summary_hash[:total_net] %></td>
+    </tr>
+    <tr class="info">
+      <th>Recurring Monthly Income:</th>
+      <td><%= @summary_hash[:monthly_recurring_receivable] %></td>
+    </tr>
+    <tr class="info">
+      <th>Recurring Monthly Expenses:</th>
+      <td><%= @summary_hash[:monthly_recurring_payable] %></td>
+    </tr>
+    <tr class="info">
+      <th>Last Month's Discresionary Spending:</th>
+      <td><%= @summary_hash[:last_month_discresionary_payable] %></td>
+    </tr>
+    <tr class="info">
+      <th>Forecasted Total By <strong><u><%= @forecast_date %></u></strong>:</th>
+      <td><%= @summary_hash[:forecasted_amount] %></td>
+    </tr>
+    <tr>
+      <td>
+        <%= simple_form_for(:custom_forecast_date, :html => { :class => 'form-horizontal' }) do |f| %>
+            <%= f.input :custom_month, collection: @next_years_months, label: 'Change forecast month to the first of this month:', :wrapper_html => { :style => 'display: inline' } %>
+            <%= f.button :submit, 'Update Forecast Month', id: 'forecast-submit' %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+</div>

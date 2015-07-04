@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   get '/general_ledger', to: 'accounts#general_ledger', as: 'general_ledger' 
   post '/general_ledger/create', to: 'accounts#save_transaction', as: 'general_ledgers'
   get '/summary', to: 'accounts#summary', as: 'summary'
+  post '/summary', to: 'accounts#summary', as: 'custom_forecast_date' 
 end
